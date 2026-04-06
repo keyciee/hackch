@@ -1,522 +1,747 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>HackCH — Coming Soon</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hack CH | The Swiss Cybersecurity Community</title>
+  <meta name="description" content="Hack CH is Switzerland's cybersecurity community — connecting the quiet brilliance of ETH Zürich, EPFL, and Swiss research institutions with the organisations that depend on their expertise." />
+  <meta name="keywords" content="Switzerland cybersecurity, Swiss hacking community, ETH Zurich security, EPFL security research, Swiss infosec, ethical hacking Switzerland, Swiss CTF" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="Hack CH — The Swiss Cybersecurity Community" />
+  <meta property="og:description" content="Quietly exceptional. Switzerland's home for cybersecurity research, talent, and precision." />
+  <meta property="og:url" content="https://hackch.com" />
+  <meta property="og:type" content="website" />
+  <link rel="canonical" href="https://hackch.com" />
 
-  :root {
-    --red: #FF0000;
-    --white: #F5F0EB;
-    --black: #0A0A0A;
-    --grey: #1A1A1A;
-    --dim: #2E2E2E;
-    --muted: #888;
-  }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
-  html, body {
-    height: 100%;
-    background: var(--black);
-    color: var(--white);
-    font-family: 'Syne', sans-serif;
-    overflow-x: hidden;
-  }
+  <style>
+    :root {
+      --white:       #fafaf8;
+      --offwhite:    #f3f2ef;
+      --cloud:       #e6e4df;
+      --mist:        #c4c0b8;
+      --red:         #c8102e;
+      --red-bright:  #e0243e;
+      --red-dim:     #960d22;
+      --charcoal:    #1e1e1e;
+      --dark:        #131313;
+      --void:        #080808;
+      --text-primary:#1e1e1e;
+      --text-muted:  #585450;
+      --text-soft:   #989490;
+    }
 
-  /* Noise grain overlay */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 100;
-    opacity: 0.45;
-  }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
-  /* Swiss cross grid lines */
-  .grid-lines {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
-    overflow: hidden;
-  }
-  .grid-lines::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 0;
-    bottom: 0;
-    width: 1px;
-    background: rgba(255,255,255,0.04);
-  }
-  .grid-lines::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: rgba(255,255,255,0.04);
-  }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--text-primary);
+      overflow-x: hidden;
+    }
 
-  /* Red corner accent */
-  .corner-accent {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 6px;
-    height: 100vh;
-    background: var(--red);
-    z-index: 50;
-    animation: slideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    transform-origin: top;
-  }
+    /* ── BANNER ── */
+    #offer-banner {
+      background: var(--void);
+      color: rgba(250,250,248,0.5);
+      text-align: center;
+      padding: 0.6rem 1.5rem;
+      font-size: 0.76rem; letter-spacing: 0.03em; line-height: 1.5;
+      position: relative; z-index: 200;
+    }
+    #offer-banner a {
+      color: #e89090; text-decoration: none; font-weight: 500;
+      border-bottom: 1px solid rgba(232,144,144,0.3);
+      transition: color 0.2s, border-color 0.2s;
+    }
+    #offer-banner a:hover { color: #f0b0b0; border-color: #f0b0b0; }
 
-  @keyframes slideIn {
-    from { transform: scaleY(0); }
-    to { transform: scaleY(1); }
-  }
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(250,250,248,0.93);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(196,192,184,0.35);
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+    nav.scrolled {
+      background: rgba(250,250,248,0.99);
+      box-shadow: 0 1px 20px rgba(30,30,30,0.07);
+    }
+    .nav-logo {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.35rem; font-weight: 700;
+      letter-spacing: 0.02em; color: var(--text-primary);
+      text-decoration: none; flex-shrink: 0;
+    }
+    .nav-logo span { color: var(--red); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.78rem; font-weight: 400;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      color: var(--text-muted); text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-cta {
+      font-size: 0.76rem; font-weight: 500;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--white); background: var(--charcoal);
+      border: none; padding: 0.62rem 1.4rem; border-radius: 2px;
+      cursor: pointer; text-decoration: none; white-space: nowrap;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .nav-cta:hover { background: var(--void); transform: translateY(-1px); }
 
-  /* Main layout */
-  .page {
-    min-height: 100vh;
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    padding: 0 5vw;
-    position: relative;
-    z-index: 2;
-  }
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 4px; background: none; border: none;
+    }
+    .nav-hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--text-primary); border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-  /* Header */
-  header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 2.5rem 0;
-    border-bottom: 1px solid var(--dim);
-    opacity: 0;
-    animation: fadeUp 0.7s ease 0.3s forwards;
-  }
+    .nav-drawer {
+      display: none; position: fixed; inset: 0;
+      background: rgba(8,8,8,0.97); z-index: 99;
+      flex-direction: column; align-items: center;
+      justify-content: center; gap: 2.5rem; padding: 2rem;
+    }
+    .nav-drawer.open { display: flex; }
+    .nav-drawer a {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 2.2rem; font-weight: 400; color: var(--white);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-drawer a:hover { color: #e89090; }
+    .nav-drawer .drawer-cta {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem; font-weight: 500; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--white); background: var(--red);
+      padding: 1rem 2.5rem; border-radius: 2px; margin-top: 0.5rem;
+    }
+    .drawer-close {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      background: none; border: none; color: rgba(250,250,248,0.35);
+      font-size: 1.8rem; cursor: pointer; line-height: 1;
+    }
 
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
+    /* ── HERO ── */
+    #hero {
+      position: relative; width: 100%; height: 100svh;
+      min-height: 560px; display: flex;
+      align-items: center; justify-content: center;
+      overflow: hidden; background: var(--dark);
+    }
+    #hero-fallback {
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, #080808 0%, #1e1e1e 60%, #131313 100%);
+      z-index: 0;
+    }
+    #hero-bg-img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; object-position: center 35%; z-index: 1;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(8,8,8,0.58) 0%,
+        rgba(8,8,8,0.28) 40%,
+        rgba(8,8,8,0.82) 100%
+      );
+      z-index: 2;
+    }
+    /* Swiss cross watermark */
+    .hero-cross {
+      position: absolute; right: 6%; top: 50%;
+      transform: translateY(-50%);
+      z-index: 2; opacity: 0.055; pointer-events: none;
+    }
+    .hero-cross svg { width: min(300px, 28vw); height: min(300px, 28vw); }
 
-  .swiss-cross {
-    width: 28px;
-    height: 28px;
-    background: var(--red);
-    position: relative;
-    flex-shrink: 0;
-  }
-  .swiss-cross::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 10px;
-    height: 20px;
-    background: var(--red);
-    box-shadow: 0 0 0 5px var(--black), 5px 0 0 5px var(--black), -5px 0 0 5px var(--black);
-  }
-  /* Simpler Swiss cross using clip-path */
-  .swiss-cross {
-    clip-path: polygon(
-      33% 0%, 66% 0%, 66% 33%, 100% 33%,
-      100% 66%, 66% 66%, 66% 100%, 33% 100%,
-      33% 66%, 0% 66%, 0% 33%, 33% 33%
-    );
-  }
+    .hero-content {
+      position: relative; z-index: 3; text-align: center;
+      color: var(--white); max-width: 820px; padding: 0 1.5rem;
+    }
+    .hero-eyebrow {
+      font-size: 0.7rem; font-weight: 400;
+      letter-spacing: 0.3em; text-transform: uppercase;
+      color: #e89090; margin-bottom: 1.4rem;
+      opacity: 0; animation: fadeUp 1s 0.3s cubic-bezier(0.22,1,0.36,1) forwards;
+    }
+    .hero-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: clamp(2.8rem, 8vw, 6.8rem);
+      font-weight: 700; line-height: 1.06;
+      letter-spacing: -0.02em; margin-bottom: 1.6rem;
+      opacity: 0; animation: fadeUp 1.1s 0.5s cubic-bezier(0.22,1,0.36,1) forwards;
+    }
+    .hero-title em { font-style: italic; font-weight: 400; color: #e89090; }
+    .hero-sub {
+      font-size: clamp(0.92rem, 2.2vw, 1.05rem); font-weight: 300;
+      line-height: 1.78; color: rgba(250,250,248,0.68);
+      max-width: 500px; margin: 0 auto 2.2rem;
+      opacity: 0; animation: fadeUp 1.1s 0.7s cubic-bezier(0.22,1,0.36,1) forwards;
+    }
+    .hero-actions {
+      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp 1.1s 0.9s cubic-bezier(0.22,1,0.36,1) forwards;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .btn-primary {
+      font-size: 0.76rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--white); background: var(--red);
+      border: none; padding: 0.95rem 2rem; border-radius: 2px;
+      cursor: pointer; text-decoration: none;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--red-bright); transform: translateY(-2px); }
+    .btn-ghost {
+      font-size: 0.76rem; font-weight: 400;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--white); background: transparent;
+      border: 1px solid rgba(250,250,248,0.3);
+      padding: 0.95rem 2rem; border-radius: 2px;
+      cursor: pointer; text-decoration: none;
+      transition: border-color 0.2s, background 0.2s, transform 0.2s;
+    }
+    .btn-ghost:hover {
+      border-color: #e89090; background: rgba(200,16,46,0.08); transform: translateY(-2px);
+    }
+    .hero-scroll-hint {
+      position: absolute; bottom: 2rem; left: 50%;
+      transform: translateX(-50%); z-index: 3;
+      display: flex; flex-direction: column; align-items: center; gap: 0.45rem;
+      color: rgba(250,250,248,0.3); font-size: 0.6rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      animation: scrollFloat 2.5s ease-in-out infinite;
+    }
+    @keyframes scrollFloat {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(7px); }
+    }
+    .scroll-line {
+      width: 1px; height: 36px;
+      background: linear-gradient(to bottom, rgba(200,16,46,0.6), transparent);
+    }
 
-  .logo-text {
-    font-size: 1.35rem;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-  }
-  .logo-text span { color: var(--red); }
+    /* ── SECTION COMMON ── */
+    .section-label {
+      font-size: 0.67rem; font-weight: 500;
+      letter-spacing: 0.26em; text-transform: uppercase;
+      color: var(--red); margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      font-weight: 700; line-height: 1.14;
+      color: var(--text-primary); margin-bottom: 1.4rem;
+    }
+    .section-title em { font-style: italic; font-weight: 400; color: var(--red); }
+    .section-body {
+      font-size: 0.97rem; font-weight: 300;
+      line-height: 1.85; color: var(--text-muted); max-width: 520px;
+    }
 
-  .badge {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.18em;
-    color: var(--muted);
-    border: 1px solid var(--dim);
-    padding: 0.35rem 0.75rem;
-    text-transform: uppercase;
-  }
+    /* ── INSTITUTIONS ── */
+    #institutions-wrap { padding: 6rem 4rem; background: #fff; }
+    #institutions {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .inst-list { display: flex; flex-direction: column; gap: 1.5px; }
+    .inst-row {
+      display: grid; grid-template-columns: 64px 1fr auto;
+      align-items: center; gap: 1rem;
+      padding: 1.2rem 1.4rem;
+      background: var(--offwhite); border: 1px solid var(--cloud);
+      transition: background 0.3s;
+    }
+    .inst-row:hover { background: #fdf8f8; }
+    .inst-rank {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.5rem; font-weight: 700; font-style: italic;
+      color: rgba(200,16,46,0.28); text-align: center; line-height: 1;
+    }
+    .inst-info h4 {
+      font-size: 0.88rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.15rem;
+    }
+    .inst-info p {
+      font-size: 0.76rem; font-weight: 300; color: var(--text-muted); line-height: 1.5;
+    }
+    .inst-lang {
+      font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.22rem 0.6rem; border-radius: 2px; white-space: nowrap;
+      color: var(--text-soft); background: var(--cloud); border: 1px solid var(--mist);
+    }
+    .swiss-callout {
+      background: linear-gradient(135deg, var(--charcoal) 0%, var(--void) 100%);
+      border-radius: 3px; padding: 2.2rem; margin-top: 1.5px; color: var(--white);
+    }
+    .swiss-callout .big-word {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 3.2rem; font-weight: 700; font-style: italic;
+      line-height: 1; color: #e89090; margin-bottom: 0.5rem;
+    }
+    .swiss-callout p {
+      font-size: 0.82rem; font-weight: 300;
+      color: rgba(250,250,248,0.62); line-height: 1.65;
+    }
 
-  /* Hero */
-  .hero {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 6vh 0;
-    position: relative;
-  }
+    /* ── PROGRAMS ── */
+    #programs {
+      background: var(--charcoal); color: var(--white); padding: 7rem 4rem;
+    }
+    .prog-inner { max-width: 1200px; margin: 0 auto; }
+    #programs .section-title { color: var(--white); }
+    #programs .section-title em { color: #e89090; }
+    #programs .section-body { color: rgba(250,250,248,0.55); }
+    #programs .section-label { color: #e89090; }
+    .prog-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2px; margin-top: 4rem;
+    }
+    .prog-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      padding: 2.5rem 2rem;
+      transition: background 0.3s; position: relative; overflow: hidden;
+    }
+    .prog-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(to right, var(--red-dim), var(--red-bright));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+    }
+    .prog-card:hover::before { transform: scaleX(1); }
+    .prog-card:hover { background: rgba(200,16,46,0.04); }
+    .prog-num {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 2.8rem; font-weight: 700;
+      color: rgba(200,16,46,0.22); line-height: 1; margin-bottom: 0.6rem;
+    }
+    .prog-card h3 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.3rem; font-weight: 700; margin-bottom: 0.8rem; color: var(--white);
+    }
+    .prog-card p {
+      font-size: 0.86rem; font-weight: 300; line-height: 1.75;
+      color: rgba(250,250,248,0.5);
+    }
 
-  .eyebrow {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.22em;
-    color: var(--red);
-    text-transform: uppercase;
-    margin-bottom: 2.5rem;
-    opacity: 0;
-    animation: fadeUp 0.6s ease 0.5s forwards;
-  }
+    /* ── METRICS ── */
+    #metrics-wrap { padding: 7rem 4rem; background: var(--white); }
+    #metrics {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center;
+    }
+    .metric-table { display: flex; flex-direction: column; }
+    .m-row {
+      display: grid; grid-template-columns: 1fr auto;
+      align-items: center; gap: 2rem;
+      padding: 1.35rem 0; border-bottom: 1px solid var(--cloud);
+    }
+    .m-row:first-child { border-top: 1px solid var(--cloud); }
+    .m-label { font-size: 0.85rem; font-weight: 400; color: var(--text-muted); }
+    .m-val {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.7rem; font-weight: 700;
+      color: var(--text-primary); line-height: 1; text-align: right; white-space: nowrap;
+    }
+    .m-val span { font-size: 0.88rem; font-weight: 400; color: var(--red); margin-left: 0.3rem; }
 
-  .headline {
-    font-size: clamp(4rem, 11vw, 10rem);
-    font-weight: 800;
-    line-height: 0.92;
-    letter-spacing: -0.04em;
-    opacity: 0;
-    animation: fadeUp 0.7s ease 0.6s forwards;
-  }
+    /* ── SECTORS ── */
+    #sectors {
+      background: linear-gradient(160deg, var(--charcoal) 0%, var(--void) 100%);
+      padding: 7rem 4rem; text-align: center; color: var(--white);
+    }
+    #sectors .section-label { color: #e89090; }
+    #sectors .section-title { color: var(--white); margin: 0 auto 1.4rem; }
+    #sectors .section-title em { color: #e89090; }
+    #sectors .section-body { color: rgba(250,250,248,0.58); margin: 0 auto 3.5rem; text-align: center; }
+    .sectors-grid {
+      display: flex; justify-content: center;
+      flex-wrap: wrap; gap: 1rem; max-width: 860px; margin: 0 auto;
+    }
+    .sector-tag {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(250,250,248,0.72); font-size: 0.8rem;
+      letter-spacing: 0.06em; padding: 0.65rem 1.3rem; border-radius: 2px;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .sector-tag:hover {
+      background: rgba(200,16,46,0.1); border-color: rgba(200,16,46,0.4); color: #e89090;
+    }
 
-  .headline em {
-    font-style: normal;
-    color: transparent;
-    -webkit-text-stroke: 1.5px var(--white);
-    opacity: 0.35;
-  }
+    /* ── CTA ── */
+    #cta-section {
+      background: var(--offwhite); text-align: center; padding: 7rem 2rem;
+    }
+    #cta-section .section-title { margin: 0 auto 1rem; }
+    #cta-section .section-body  { margin: 0 auto 2.5rem; text-align: center; }
+    .waitlist-form {
+      display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap;
+    }
+    .waitlist-form input {
+      font-family: 'Inter', sans-serif; font-size: 0.9rem;
+      padding: 0.95rem 1.4rem; border: 1px solid var(--mist);
+      border-radius: 2px; width: 280px; max-width: 100%; outline: none;
+      color: var(--text-primary); background: #fff; transition: border-color 0.2s;
+    }
+    .waitlist-form input:focus { border-color: var(--red); }
 
-  .tagline {
-    margin-top: 3rem;
-    max-width: 520px;
-    font-size: 1.05rem;
-    font-weight: 400;
-    line-height: 1.7;
-    color: var(--muted);
-    opacity: 0;
-    animation: fadeUp 0.7s ease 0.75s forwards;
-  }
+    /* ── FOOTER ── */
+    footer { background: var(--void); padding: 4rem 4rem 3rem; }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem;
+    }
+    .footer-brand .nav-logo { color: var(--white); display: block; margin-bottom: 1rem; }
+    footer p, footer a {
+      font-size: 0.79rem; font-weight: 300; line-height: 1.85;
+      color: rgba(250,250,248,0.36); text-decoration: none;
+    }
+    footer a:hover { color: #e89090; }
+    .footer-col h4 {
+      font-size: 0.66rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(250,250,248,0.45); margin-bottom: 1rem;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.35rem; }
+    .footer-bottom {
+      max-width: 1200px; margin: 2.5rem auto 0;
+      border-top: 1px solid rgba(255,255,255,0.07); padding-top: 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.72rem; flex-wrap: wrap; gap: 0.5rem;
+    }
 
-  /* Countdown */
-  .countdown-wrap {
-    margin-top: 4rem;
-    opacity: 0;
-    animation: fadeUp 0.7s ease 0.9s forwards;
-  }
+    .fade-up {
+      opacity: 0; transform: translateY(22px);
+      transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1);
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
 
-  .countdown-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    color: var(--muted);
-    text-transform: uppercase;
-    margin-bottom: 1.2rem;
-  }
-
-  .countdown {
-    display: flex;
-    gap: 0;
-    align-items: flex-end;
-  }
-
-  .cd-unit {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .cd-num {
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    line-height: 1;
-    font-variant-numeric: tabular-nums;
-    min-width: 2.5ch;
-    text-align: center;
-  }
-
-  .cd-sep {
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    font-weight: 800;
-    color: var(--red);
-    line-height: 1;
-    padding: 0 0.3rem;
-    padding-bottom: 0.15rem;
-  }
-
-  .cd-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.55rem;
-    letter-spacing: 0.15em;
-    color: var(--muted);
-    text-transform: uppercase;
-    margin-top: 0.4rem;
-  }
-
-  /* Email form */
-  .form-wrap {
-    margin-top: 3.5rem;
-    opacity: 0;
-    animation: fadeUp 0.7s ease 1.05s forwards;
-  }
-
-  .form-row {
-    display: flex;
-    gap: 0;
-    max-width: 480px;
-  }
-
-  .email-input {
-    flex: 1;
-    background: var(--grey);
-    border: 1px solid var(--dim);
-    border-right: none;
-    color: var(--white);
-    font-family: 'Space Mono', monospace;
-    font-size: 0.82rem;
-    padding: 1rem 1.2rem;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  .email-input::placeholder { color: var(--muted); }
-  .email-input:focus { border-color: var(--red); }
-
-  .submit-btn {
-    background: var(--red);
-    color: var(--white);
-    border: none;
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 0.82rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 1rem 1.6rem;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.15s;
-    white-space: nowrap;
-  }
-  .submit-btn:hover { background: #cc0000; }
-  .submit-btn:active { transform: scale(0.97); }
-
-  .form-note {
-    margin-top: 0.8rem;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.1em;
-    color: var(--muted);
-  }
-
-  /* Large CH background watermark */
-  .watermark {
-    position: fixed;
-    right: -2vw;
-    bottom: -4vh;
-    font-size: clamp(18rem, 40vw, 42rem);
-    font-weight: 800;
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(255,255,255,0.04);
-    pointer-events: none;
-    line-height: 1;
-    z-index: 0;
-    letter-spacing: -0.05em;
-    user-select: none;
-  }
-
-  /* Footer */
-  footer {
-    padding: 2rem 0;
-    border-top: 1px solid var(--dim);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    opacity: 0;
-    animation: fadeUp 0.7s ease 1.2s forwards;
-  }
-
-  .footer-left {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.62rem;
-    letter-spacing: 0.12em;
-    color: var(--muted);
-    text-transform: uppercase;
-  }
-
-  .footer-right {
-    display: flex;
-    gap: 1.8rem;
-    align-items: center;
-  }
-
-  .footer-link {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.62rem;
-    letter-spacing: 0.12em;
-    color: var(--muted);
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .footer-link:hover { color: var(--white); }
-
-  .dot {
-    width: 6px;
-    height: 6px;
-    background: var(--red);
-    border-radius: 50%;
-    animation: pulse 2s ease-in-out infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(0.7); }
-  }
-
-  /* Success state */
-  .success-msg {
-    display: none;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    color: var(--red);
-    margin-top: 1rem;
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(22px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* Responsive */
-  @media (max-width: 600px) {
-    .form-row { flex-direction: column; }
-    .email-input { border-right: 1px solid var(--dim); border-bottom: none; }
-    .footer-right { gap: 1rem; }
-    .badge { display: none; }
-  }
-</style>
+    @media (max-width: 1024px) {
+      nav { padding: 1.1rem 2rem; }
+      #institutions-wrap, #metrics-wrap, #programs, #sectors { padding: 5rem 2rem; }
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .nav-hamburger { display: flex; }
+      nav { padding: 1rem 1.5rem; }
+      #hero { min-height: 500px; }
+      .hero-scroll-hint { display: none; }
+      .hero-cross { display: none; }
+      #institutions { grid-template-columns: 1fr; gap: 3rem; }
+      #metrics      { grid-template-columns: 1fr; gap: 3rem; }
+      .prog-grid    { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .inst-row { grid-template-columns: 50px 1fr; }
+      .inst-lang { display: none; }
+    }
+    @media (max-width: 480px) {
+      .footer-inner { grid-template-columns: 1fr; }
+      .hero-actions { flex-direction: column; align-items: center; }
+      .btn-primary, .btn-ghost { width: 100%; max-width: 300px; text-align: center; }
+      .waitlist-form { flex-direction: column; align-items: center; }
+      .waitlist-form input { width: 100%; max-width: 320px; }
+    }
+  </style>
 </head>
 <body>
 
-<div class="grid-lines"></div>
-<div class="corner-accent"></div>
-<div class="watermark">CH</div>
+  <div id="offer-banner">
+    hackch.com is available for acquisition.&ensp;·&ensp;
+    <a href="https://hacklb.com" target="_blank" rel="noopener noreferrer">Browse our domain portfolio →</a>
+  </div>
 
-<div class="page">
-  <header>
-    <div class="logo">
-      <div class="swiss-cross"></div>
-      <div class="logo-text">Hack<span>CH</span></div>
+  <nav id="main-nav">
+    <a class="nav-logo" href="/">Hack<span>CH</span></a>
+    <ul class="nav-links">
+      <li><a href="#institutions-wrap">Institutions</a></li>
+      <li><a href="#programs">Programs</a></li>
+      <li><a href="#metrics-wrap">Community</a></li>
+    </ul>
+    <a class="nav-cta" href="#cta-section">Join HackCH</a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="nav-drawer" id="nav-drawer" role="dialog">
+    <button class="drawer-close" id="drawer-close">✕</button>
+    <a href="#institutions-wrap" onclick="closeDrawer()">Institutions</a>
+    <a href="#programs"          onclick="closeDrawer()">Programs</a>
+    <a href="#metrics-wrap"      onclick="closeDrawer()">Community</a>
+    <a href="#cta-section"       onclick="closeDrawer()" class="drawer-cta">Join HackCH</a>
+  </div>
+
+  <section id="hero" aria-label="Hack CH — Switzerland's Cybersecurity Community">
+    <div id="hero-fallback"></div>
+    <img
+      id="hero-bg-img"
+      src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1800&q=80&auto=format&fit=crop"
+      alt="Swiss Alpine landscape representing precision, clarity and quiet excellence"
+    />
+    <div class="hero-overlay"></div>
+    <div class="hero-cross" aria-hidden="true">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <rect x="75" y="20" width="50" height="160" fill="white"/>
+        <rect x="20" y="75" width="160" height="50" fill="white"/>
+      </svg>
     </div>
-    <div class="badge">Zürich · 2025</div>
-  </header>
-
-  <main class="hero">
-    <p class="eyebrow">// Something is loading</p>
-    <h1 class="headline">We're<br/>build<em>ing.</em></h1>
-    <p class="tagline">
-      HackCH is a new home for builders, makers, and hackers rooted in Swiss precision — and global ambition. We launch soon.
-    </p>
-
-    <div class="countdown-wrap">
-      <p class="countdown-label">// Launching in</p>
-      <div class="countdown">
-        <div class="cd-unit">
-          <span class="cd-num" id="days">00</span>
-          <span class="cd-label">Days</span>
-        </div>
-        <span class="cd-sep">:</span>
-        <div class="cd-unit">
-          <span class="cd-num" id="hours">00</span>
-          <span class="cd-label">Hours</span>
-        </div>
-        <span class="cd-sep">:</span>
-        <div class="cd-unit">
-          <span class="cd-num" id="mins">00</span>
-          <span class="cd-label">Min</span>
-        </div>
-        <span class="cd-sep">:</span>
-        <div class="cd-unit">
-          <span class="cd-num" id="secs">00</span>
-          <span class="cd-label">Sec</span>
-        </div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Switzerland's Cybersecurity Community</p>
+      <h1 class="hero-title">Quietly <em>brilliant.</em><br>Precisely secure.</h1>
+      <p class="hero-sub">Switzerland doesn't announce its security capabilities. It demonstrates them. From ETH Zürich's cryptography labs to EPFL's security research, to the institutions that protect global finance — Hack CH connects the people who keep the world's most trusted systems safe.</p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#cta-section">Join HackCH</a>
+        <a class="btn-ghost"   href="#institutions-wrap">Our Institutions</a>
       </div>
     </div>
-
-    <div class="form-wrap">
-      <div class="form-row">
-        <input class="email-input" type="email" id="emailInput" placeholder="your@email.com" />
-        <button class="submit-btn" onclick="handleNotify()">Notify me</button>
-      </div>
-      <p class="form-note">// No spam. We hate it too.</p>
-      <p class="success-msg" id="successMsg">✓ You're on the list. See you at launch.</p>
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
     </div>
-  </main>
+  </section>
+
+  <div id="institutions-wrap">
+    <section id="institutions">
+      <div class="fade-up">
+        <p class="section-label">The Institutions</p>
+        <h2 class="section-title">Where Swiss security<br><em>excellence</em> is made</h2>
+        <p class="section-body">Switzerland's research institutions consistently rank among the world's finest in computer science, cryptography, and security. Hack CH exists to translate that academic excellence into a practitioner community that is equally exceptional.</p>
+      </div>
+      <div class="fade-up" style="transition-delay:0.1s;">
+        <div class="inst-list">
+          <div class="inst-row">
+            <span class="inst-rank">I</span>
+            <div class="inst-info"><h4>ETH Zürich</h4><p>Top-5 globally for computer science. Home to world-leading cryptography and information security research.</p></div>
+            <span class="inst-lang">DE</span>
+          </div>
+          <div class="inst-row">
+            <span class="inst-rank">II</span>
+            <div class="inst-info"><h4>EPFL Lausanne</h4><p>École Polytechnique Fédérale de Lausanne — pioneering research in systems security and privacy-preserving computation.</p></div>
+            <span class="inst-lang">FR</span>
+          </div>
+          <div class="inst-row">
+            <span class="inst-rank">III</span>
+            <div class="inst-info"><h4>University of Bern</h4><p>Leading post-quantum cryptography and applied security research, in direct collaboration with NIST.</p></div>
+            <span class="inst-lang">DE</span>
+          </div>
+          <div class="inst-row">
+            <span class="inst-rank">IV</span>
+            <div class="inst-info"><h4>CERN Security</h4><p>The most complex computing environment in science — and one of the world's most rigorous network security operations.</p></div>
+            <span class="inst-lang">FR/EN</span>
+          </div>
+          <div class="inst-row">
+            <span class="inst-rank">V</span>
+            <div class="inst-info"><h4>Swiss Federal Intelligence</h4><p>NDB cybersecurity unit and MELANI, Switzerland's national cybersecurity monitoring and reporting centre.</p></div>
+            <span class="inst-lang">CH</span>
+          </div>
+        </div>
+        <div class="swiss-callout">
+          <div class="big-word">Gründlichkeit.</div>
+          <p>Thoroughness — the German word that defines Swiss security culture. Every system analysed completely. Every vulnerability documented. Every patch verified. No shortcuts.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section id="programs" aria-label="HackCH Programs">
+    <div class="prog-inner">
+      <div class="fade-up" style="max-width:600px;">
+        <p class="section-label">Programs</p>
+        <h2 class="section-title">Swiss precision,<br><em>applied to security</em></h2>
+        <p class="section-body">Hack CH programmes reflect the Swiss character — rigorously structured, multilingual, and designed to produce practitioners who meet the exacting standards of Switzerland's public and private institutions.</p>
+      </div>
+      <div class="prog-grid">
+        <article class="prog-card fade-up">
+          <div class="prog-num">01</div>
+          <h3>Swiss CTF League</h3>
+          <p>A national Capture The Flag competition series across German, French, and Italian-speaking Switzerland — connecting university security clubs in all four linguistic regions.</p>
+        </article>
+        <article class="prog-card fade-up" style="transition-delay:0.1s">
+          <div class="prog-num">02</div>
+          <h3>Crypto Research Bridge</h3>
+          <p>A practitioner-to-researcher bridge programme connecting ETH and EPFL cryptography labs with Swiss financial institutions — translating academic breakthroughs into deployable defences.</p>
+        </article>
+        <article class="prog-card fade-up" style="transition-delay:0.2s">
+          <div class="prog-num">03</div>
+          <h3>Swiss Red Team Cert</h3>
+          <p>A professional certification in offensive security designed specifically for the Swiss regulatory environment — recognised by FINMA, the Swiss Bankers Association, and federal agencies.</p>
+        </article>
+        <article class="prog-card fade-up" style="transition-delay:0.05s">
+          <div class="prog-num">04</div>
+          <h3>International Geneva Lab</h3>
+          <p>A unique programme leveraging Geneva's concentration of international organisations — UN, ICRC, WHO — to develop security professionals for multilateral institutional environments.</p>
+        </article>
+        <article class="prog-card fade-up" style="transition-delay:0.15s">
+          <div class="prog-num">05</div>
+          <h3>Kantonspolizei Partnership</h3>
+          <p>Structured collaboration with cantonal police cyber units — developing digital forensics and incident response capabilities for Switzerland's decentralised law enforcement model.</p>
+        </article>
+        <article class="prog-card fade-up" style="transition-delay:0.25s">
+          <div class="prog-num">06</div>
+          <h3>Swiss Talent Pipeline</h3>
+          <p>A vetted placement programme connecting Hack CH members with security roles at Swiss private banks, pharmaceutical companies, and federal government agencies.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div id="metrics-wrap">
+    <section id="metrics">
+      <div class="fade-up">
+        <p class="section-label">Switzerland by Numbers</p>
+        <h2 class="section-title">A small country<br>with an <em>outsized</em> impact</h2>
+        <p class="section-body" style="margin-bottom:2rem;">8.7 million people. Four official languages. Two of the world's top-ten computer science universities. And a financial system that the world trusts with more than anywhere else. The security stakes in Switzerland are extraordinary.</p>
+      </div>
+      <div class="fade-up" style="transition-delay:0.12s;">
+        <div class="metric-table">
+          <div class="m-row">
+            <span class="m-label">ETH Zürich global CS ranking</span>
+            <span class="m-val">#3 <span>worldwide</span></span>
+          </div>
+          <div class="m-row">
+            <span class="m-label">Swiss banking assets managed</span>
+            <span class="m-val">CHF 7.9T <span></span></span>
+          </div>
+          <div class="m-row">
+            <span class="m-label">International organisations in Geneva</span>
+            <span class="m-val">750+ <span></span></span>
+          </div>
+          <div class="m-row">
+            <span class="m-label">Official national languages</span>
+            <span class="m-val">4 <span>DE · FR · IT · RM</span></span>
+          </div>
+          <div class="m-row">
+            <span class="m-label">NCSC reports per year</span>
+            <span class="m-val">34,000+ <span>incidents</span></span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section id="sectors" aria-label="Sectors HackCH Serves">
+    <p class="section-label">Who We Protect</p>
+    <h2 class="section-title">The sectors where Swiss<br>security <em>matters most</em></h2>
+    <p class="section-body">The organisations Swiss society trusts most — with its money, its health, its international standing — are exactly those for whom a security failure is most catastrophic.</p>
+    <div class="sectors-grid fade-up">
+      <span class="sector-tag">Private Banking</span>
+      <span class="sector-tag">Wealth Management</span>
+      <span class="sector-tag">Pharmaceuticals</span>
+      <span class="sector-tag">International Organisations</span>
+      <span class="sector-tag">Federal Government</span>
+      <span class="sector-tag">Watch &amp; Luxury</span>
+      <span class="sector-tag">Insurance &amp; Reinsurance</span>
+      <span class="sector-tag">Commodity Trading</span>
+      <span class="sector-tag">Research &amp; Academia</span>
+    </div>
+  </section>
+
+  <section id="cta-section" aria-label="Join HackCH">
+    <p class="section-label">Join HackCH</p>
+    <h2 class="section-title" style="max-width:500px; margin:0 auto 1rem;">Swiss security.<br><em>Seriously.</em></h2>
+    <p class="section-body">Join the Hack CH community — connecting Switzerland's security researchers, practitioners, and the institutions that depend on their expertise.</p>
+    <form class="waitlist-form" onsubmit="handleWaitlist(event)">
+      <input type="email" id="email-input" placeholder="you@email.ch" required />
+      <button type="submit" class="btn-primary">Join HackCH</button>
+    </form>
+    <p id="waitlist-msg" style="margin-top:1.2rem; font-size:0.84rem; color:var(--red); min-height:1.2em;"></p>
+    <p style="font-size:0.72rem; color:var(--text-soft); margin-top:0.5rem;">Kein Spam. Daten werden gemäß nDSG verarbeitet.</p>
+  </section>
 
   <footer>
-    <div class="footer-left">hackch.com &nbsp;·&nbsp; All rights reserved</div>
-    <div class="footer-right">
-      <div class="dot"></div>
-      <a href="#" class="footer-link">Twitter</a>
-      <a href="#" class="footer-link">LinkedIn</a>
-      <a href="mailto:hello@hackch.com" class="footer-link">Contact</a>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a class="nav-logo" href="/">Hack<span style="color:#e89090">CH</span></a>
+        <p>Switzerland's cybersecurity community.<br>DE · FR · IT · RM</p>
+      </div>
+      <div class="footer-col">
+        <h4>Community</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Swiss CTF League</a></li>
+          <li><a href="#">Research Bridge</a></li>
+          <li><a href="#">Events</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Employers</h4>
+        <ul>
+          <li><a href="#">Talent Pipeline</a></li>
+          <li><a href="#">Post a Role</a></li>
+          <li><a href="#">Partnership</a></li>
+          <li><a href="#">Certifications</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Datenschutz</a></li>
+          <li><a href="#">nDSG Compliance</a></li>
+          <li><a href="#">Nutzungsbedingungen</a></li>
+          <li><a href="#">Kontakt</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 HackCH. Alle Rechte vorbehalten.</p>
+      <p>hackch.com — Swiss cybersecurity, precisely.</p>
     </div>
   </footer>
-</div>
 
-<script>
-  // Countdown to a launch date ~90 days from now
-  const launch = new Date();
-  launch.setDate(launch.getDate() + 90);
-  launch.setHours(9, 0, 0, 0);
-
-  function pad(n) { return String(n).padStart(2, '0'); }
-
-  function tick() {
-    const now = new Date();
-    const diff = launch - now;
-    if (diff <= 0) {
-      document.getElementById('days').textContent = '00';
-      document.getElementById('hours').textContent = '00';
-      document.getElementById('mins').textContent = '00';
-      document.getElementById('secs').textContent = '00';
-      return;
+  <script>
+    var hamburger = document.getElementById('hamburger');
+    var drawer = document.getElementById('nav-drawer');
+    var drawerClose = document.getElementById('drawer-close');
+    hamburger.addEventListener('click', function () {
+      var isOpen = drawer.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    drawerClose.addEventListener('click', closeDrawer);
+    function closeDrawer() {
+      drawer.classList.remove('open');
+      hamburger.classList.remove('open');
+      document.body.style.overflow = '';
     }
-    const d = Math.floor(diff / 86400000);
-    const h = Math.floor((diff % 86400000) / 3600000);
-    const m = Math.floor((diff % 3600000) / 60000);
-    const s = Math.floor((diff % 60000) / 1000);
-    document.getElementById('days').textContent = pad(d);
-    document.getElementById('hours').textContent = pad(h);
-    document.getElementById('mins').textContent = pad(m);
-    document.getElementById('secs').textContent = pad(s);
-  }
-
-  tick();
-  setInterval(tick, 1000);
-
-  function handleNotify() {
-    const input = document.getElementById('emailInput');
-    if (!input.value || !input.value.includes('@')) {
-      input.style.borderColor = '#FF0000';
-      input.focus();
-      return;
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeDrawer(); });
+    window.addEventListener('scroll', function () {
+      document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(function (el) { observer.observe(el); });
+    function handleWaitlist(e) {
+      e.preventDefault();
+      document.getElementById('waitlist-msg').textContent = '✓ Vielen Dank. Wir melden uns bald.';
+      document.getElementById('email-input').value = '';
     }
-    input.style.borderColor = '';
-    document.getElementById('successMsg').style.display = 'block';
-    input.value = '';
-    input.placeholder = 'done ✓';
-    input.disabled = true;
-    document.querySelector('.submit-btn').disabled = true;
-    document.querySelector('.submit-btn').textContent = 'Done';
-  }
-
-  document.getElementById('emailInput').addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') handleNotify();
-  });
-</script>
+  </script>
 </body>
 </html>
